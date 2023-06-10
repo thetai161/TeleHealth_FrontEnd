@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column flex">
     <div class="row no-gutters h-100">
-      <div class="col-md-6 bg-primary" style="">
+      <!-- <div class="col-md-6 bg-primary" style="">
         <div class="p-3 p-md-5 d-flex flex-column h-100">
           <h4 class="mb-3 text-white">TeleHealth</h4>
           <div class="text-fade">Copyright @IBMELab</div>
@@ -15,14 +15,15 @@
             <a href="#" class="text-white mx-1">Policy</a>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
+      </div> -->
+      <div class="col-md-12">
         <div id="content-body">
-          <div class="p-3 p-md-5" style="width: 500px">
-            <h5>Xin chào</h5>
-            <p>
+          <div class="p-3 p-md-5 content" style="width: 500px">
+            <h4>Đăng ký tài khoản</h4>
+            <!-- <p>
               <small class="text-muted">Đăng kí tài khoản của bạn</small>
-            </p>
+            </p> -->
+            <hr>
             <div class="">
               <form
                 @submit.prevent="signUpDoctor"
@@ -32,6 +33,7 @@
                 <div></div>
                 <div class="my-3 text-muted text-sm text-muted"></div>
                 <div class="form-group">
+                  <label>Tên tài khoản:</label>
                   <input
                     type="text"
                     class="form-control"
@@ -41,6 +43,7 @@
                   />
                 </div>
                 <div class="form-group">
+                  <label>Email:</label>
                   <input
                     type="email"
                     class="form-control"
@@ -50,6 +53,7 @@
                   />
                 </div>
                 <div class="form-group">
+                  <label>Mật khẩu:</label>
                   <input
                     type="password"
                     class="form-control"
@@ -59,6 +63,7 @@
                   />
                 </div>
                 <div class="form-group">
+                  <label>Số điện thoại:</label>
                   <input
                     type="text"
                     class="form-control"
@@ -67,18 +72,31 @@
                     v-model="phone"
                   />
                 </div>
-                <div class="mb-3 text-sm">
+                <div class="form-group">
+                  <label for="role">Chức vụ:</label>
+                  <div>
+                    <select id="role" v-model="role">
+                      <option v-for="option in options" v-bind:value="option.value">
+                        {{ option.text }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <!-- <div class="mb-3 text-sm">
                   <span class="text-muted"
                     >Bằng việc nhấn đăng kí,Tôi đồng ý với
                   </span>
                   <a href="#" data-pjax-state="">những điều khoản dịch vụ</a>
+                </div> -->
+                <div style="text-align: center;">
+                  <button type="submit" class="btn btn-primary mb-4" style="padding: 10px 20px; font-size: 16px">
+                    Đăng ký
+                  </button>
                 </div>
-                <button type="submit" class="btn btn-primary mb-4">
-                  Đăng kí
-                </button>
-                <div>
-                  Bạn đã có tài khoản
+                <div style="display: flex;">
+                  <div style="margin-right: 10px; font-size: 16px;">Bạn đã có tài khoản? </div>
                   <a
+                    style="font-size: 16px;"
                     @click="formLogin"
                     class="text-primary _600"
                     data-pjax-state=""
@@ -103,6 +121,11 @@ export default {
       emailDoctor: "",
       password: "",
       phone: "",
+      role: "role1",
+      options: [
+        { text: 'Bác sĩ', value: 'role1' },
+        { text: 'Bệnh viện', value: 'role3' }
+      ],
       usernameError: false,
       emailError: false,
       pwdError: false,
@@ -175,6 +198,7 @@ export default {
         username: this.userNameDoctor,
         password: this.password,
         phone: this.phone,
+        role: this.role
       };
       axios
         .post("http://127.0.0.1:8000/auth/doctor_register/", accountDoctor)
@@ -204,5 +228,23 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
+  background-image: url('../../../background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+.content {
+  background-color: rgb(245, 245, 245);
+}
+
+.form-control {
+  padding: 20px;
+}
+
+select {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+}
+
 </style>

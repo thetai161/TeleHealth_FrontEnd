@@ -117,8 +117,6 @@ Layout
     top: 0 !important;
     position: fixed;
     z-index: 1050 !important;
-    display: none;
-    opactiy: 0;
     .bg-dark &,
     &{
       background: transparent !important;
@@ -141,6 +139,6 @@ Layout
 @media print {
   .page-sidenav,
   .page-header{
-    display: none !important;
+    // display: none !important;
   }
 }

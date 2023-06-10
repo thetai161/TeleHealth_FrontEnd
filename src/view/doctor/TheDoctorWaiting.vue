@@ -1,8 +1,8 @@
 <template>
-  <div id="content" class="flex">
-    <div class="d-flex flex fixed-content">
+  <div class="flex">
+    <div>
       <div class="fade aside aside-sm" id="content-aside"></div>
-      <div class="d-flex flex" id="content-body">
+      <div>
         <div class="d-flex flex-column flex" id="user-list">
           <div class="p-3">
             <div class="toolbar">
@@ -71,7 +71,7 @@
           <!-- brand -->
           <a class="navbar-brand title" data-pjax-state="">
             <!-- <img src="../assets/img/logo.png" alt="..."> -->
-            <span style="color: #1890ff" class="hidden-folded d-inline l-s-n-1x"
+            <span style="color: #1890ff; font-size: 20px;" class="hidden-folded d-inline l-s-n-1x"
               >Danh sách bác sĩ đang chờ xác nhận</span
             >
           </a>
@@ -462,10 +462,10 @@ export default {
   direction: ltr;
   margin: 30px auto 0px;
 }
-div#content {
+/* div#content {
   width: 86vw;
   position: relative;
-}
+} */
 div#flexVue {
   flex-direction: row-reverse;
   justify-content: space-between;

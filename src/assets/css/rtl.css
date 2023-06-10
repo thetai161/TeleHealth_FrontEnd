@@ -9,7 +9,7 @@ input{
 }
 @media (max-width: 991.98px) {
   .page-sidenav > * {
-    transform: translate3d(100%, 0, 0);
+    /* transform: translate3d(100%, 0, 0); */
   }
 }
 

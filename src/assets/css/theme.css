@@ -371,7 +371,7 @@ Card
   background: #fff;
   border-width: 0;
   border-radius: 0.25rem;
-  box-shadow: -9px 11px 10px rgb(0 64 161 / 58%);
+  box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, .15) !important;
   margin-bottom: 1.5rem;
 }
 .card-header,
@@ -2648,6 +2648,7 @@ Layout
   overflow: hidden;
   z-index: 4 !important;
   transition: background-color 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-bottom: 1px solid rgba(25, 25, 28, .2);
 }
 .page-header.sticky ~ * .page-sidenav.sticky,
 .page-header ~ * .fixed-content {
@@ -2663,8 +2664,9 @@ Layout
 .page-sidenav {
   position: relative;
   z-index: 4 !important;
-  min-width: 13.5rem;
+  min-width: 15.5rem;
   opacity: 1 !important;
+  border-right: 1px solid rgba(25, 25, 28, .2);
 }
 .page-sidenav.sticky {
   height: 100vh;
@@ -2711,13 +2713,12 @@ Layout
     flex-direction: column;
   }
   .page-sidenav {
+    display: block !important;
     width: 100% !important;
     height: 100% !important;
     top: 0 !important;
     position: fixed;
     z-index: 1050 !important;
-    display: none;
-    opactiy: 0;
   }
   .bg-dark .page-sidenav,
   .page-sidenav {
@@ -2726,9 +2727,9 @@ Layout
   .page-sidenav > * {
     position: fixed;
     height: 100%;
-    transition: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    transform: translate3d(-100%, 0, 0);
-    width: 17.5rem;
+    /* transition: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); */
+    /* transform: translate3d(-100%, 0, 0); */
+    width: 15.5rem;
   }
   .page-sidenav.show > div {
     transform: translate3d(0, 0, 0);
@@ -2738,7 +2739,7 @@ Layout
 @media print {
   .page-sidenav,
   .page-header {
-    display: none !important;
+    /* display: none !important; */
   }
 }
 
@@ -3286,6 +3287,7 @@ Media
 Nav
 */
 .sidenav {
+  left: 0;
   margin: 0;
   pointer-events: inherit;
   display: -ms-flexbox;
@@ -3341,7 +3343,7 @@ Nav
 }
 .sidenav .nav-header {
   padding: 1rem 1rem 0.5rem 1rem;
-  font-size: 85%;
+  font-size: 100%;
 }
 .sidenav .nav-header:after {
   display: none;

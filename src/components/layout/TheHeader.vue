@@ -221,6 +221,6 @@ export default {
 }
 div#header {
   position: absolute;
-  width: calc(100% - 216px);
+  width: calc(100% - 248px);
 }
 </style>
