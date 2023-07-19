@@ -694,7 +694,7 @@ export default {
             this.$message.success("Thêm bệnh nhân thành công !");
           })
           .catch((err) => {
-            console.log(err);
+            this.$message.success("Username hoặc email đã tồn tại !");
           });
       } else if (this.formMode == "edit") {
         axios
@@ -713,7 +713,7 @@ export default {
             this.$message.success("Cập nhật bệnh nhân thành công !");
           })
           .catch((err) => {
-            console.log(err);
+            this.$message.success("Username hoặc email đã tồn tại !");
           });
       }
     },

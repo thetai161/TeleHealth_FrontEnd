@@ -487,47 +487,6 @@
                   </tr>
                 </tbody>
               </template>
-              <!-- <template v-if="isLoading">
-                <tbody>
-                  <tr
-                    class="odd"
-                    data-id="1"
-                    role="row"
-                    v-for="(ethinic, index) in 5"
-                    :key="index"
-                  >
-                    <td>
-                      <a-skeleton
-                        active
-                        class="flex-skeleton"
-                        :paragraph="{ rows: 0 }"
-                      />
-                    </td>
-
-                    <td style="text-align: left">
-                      <span class="item-amount d-none d-sm-block text-sm">
-                        <a-skeleton
-                          active
-                          class="flex-skeleton"
-                          :paragraph="{ rows: 0 }"
-                        />
-                      </span>
-                    </td>
-                    <td class="flex">
-                      <a-skeleton active :paragraph="{ rows: 1 }" />
-                    </td>
-                    <td class="letter">
-                      <a-skeleton active avatar :paragraph="{ rows: 0 }" />
-                    </td>
-                    <td
-                      style="min-width: 30px; text-align: center"
-                      class="sorting_1"
-                    >
-                      <small class="text-muted">{{ index + 1 }}</small>
-                    </td>
-                  </tr>
-                </tbody>
-              </template> -->
             </table>
           </a-tab-pane>
         </a-tabs>
@@ -719,7 +678,6 @@ export default {
   },
   async created() {
     this.dataTest = this.dataMeeting;
-    console.log(this.dataTest);
   },
   mounted() {
     let a = document.querySelector(

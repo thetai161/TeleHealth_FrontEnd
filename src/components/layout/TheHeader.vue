@@ -70,7 +70,6 @@
               dir="ltr" /><input
               type="text"
               class="form-control no-border no-shadow no-bg typeahead tt-input"
-              placeholder="Search components..."
               data-api="../../assets/api/menu.json"
               autocomplete="off"
               spellcheck="false"

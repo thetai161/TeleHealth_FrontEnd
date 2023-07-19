@@ -357,7 +357,7 @@ export default {
 
     // hàm lọc xã phường
     handleWardChange() {
-      console.log(this.doctorProfile);
+      // console.log(this.doctorProfile);
     },
     getLocation() {
       const url = "https://provinces.open-api.vn/api/";
@@ -431,7 +431,6 @@ export default {
         });
     }, 500);
     if (this.role == "role1") {
-      console.log('vào đâty');
       setTimeout(() => {
         axios
           .get(
@@ -458,7 +457,7 @@ export default {
             me.optionDepartments.forEach((item) => {
               if (item.id == res.data.medicalUnit) {
                 this.nameDepartment = item.value;
-                console.log(this.nameDepartment);
+                // console.log(this.nameDepartment);
                 this.doctorProfile.medicalUnit = item.id;
               }
             });

@@ -264,13 +264,6 @@
                         >
                           Thêm tiểu sử khám bệnh
                         </a-menu-item>
-                        <!-- <a-menu-item
-                          key="5"
-                          @click="clickInput(patient.id)"
-                          v-if="role == 'role3'"
-                        >
-                          Xóa
-                        </a-menu-item> -->
                       </a-menu>
                     </template>
                   </a-dropdown-button>

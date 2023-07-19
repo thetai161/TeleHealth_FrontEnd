@@ -98,20 +98,6 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-3 col-form-label"
-              >Link đính kèm</label
-            >
-            <div class="col-sm-9">
-              <input
-                type="text"
-                class="form-control"
-                id="inputEmail3"
-                placeholder="Ex:https://www.abc.com.vn/"
-                v-model="formMeeting.url_file.fileUrl"
-              />
-            </div>
-          </div>
-          <div class="form-group row">
             <div class="flex-save-cancle">
               <button
                 @click="btnSaveOnClick"

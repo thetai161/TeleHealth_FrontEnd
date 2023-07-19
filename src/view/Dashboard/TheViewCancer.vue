@@ -381,6 +381,62 @@
               </a-modal>
             </div>
           </a-modal>
+          <a-modal
+            style="height: 200px; width: 650px"
+            v-model:visible="payment"
+            title="Gia hạn gói chẩn đoán ung thư"
+            :footer="null"
+          >
+            <div
+              class="modal-body"
+              style="
+                max-height: 555px;
+                direction: ltr;
+                overflow-y: auto;
+                padding: 20px 10px 0 0;
+              "
+            >
+              <h5>Bạn đã sử dụng hết số lần miễn phí, vui lòng thanh toán dịch vụ để trải nghiệm không giới hạn!</h5>
+              <div id="formVnPay" class="card-body" style="direction: ltr">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Loại hàng hóa</label>
+                  <div class="col-sm-8">
+                    <select
+                      v-model="orderType"
+                      class="form-control"
+                    >
+                      <option value="billpayment">Thanh toán hóa đơn</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Số tiền</label>
+                  <div class="col-sm-8">
+                    <select
+                      v-model="amount"
+                      class="form-control"
+                    >
+                      <option value="100000000">Số tiền thanh toán: 1.000.000 VNĐ</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="flex-save-vnpay">
+                    <button
+                     @click="handlePayment"
+                      type="submit"
+                      class="btn btn-primary mt-1"
+                    >
+                      Thanh toán
+                    </button>
+                    <button @click="closeOnClick" class="btn btn-danger mt-1">
+                      Hủy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a-modal>
           <div class="pagination" v-if="patients.length > 0">
             <a-pagination
               v-model:pageSize="pageSize"
@@ -431,6 +487,9 @@ export default {
   data() {
     return {
       test123: false,
+      payment: false,
+      freeUsageCount: 0,
+      unlimitedUsage: false,
       listHistoryPatient: [],
       historyPatient: {},
       fileHistory: "",
@@ -480,6 +539,9 @@ export default {
       isHave: false,
       thumUrl: "",
       defaultFileList: [],
+      orderId: Math.floor(Math.random() * 10000),
+      orderType: "",
+      amount: "",
     };
   },
   computed: {
@@ -495,6 +557,9 @@ export default {
     idProfile() {
       return this.$store.getters["idProfile"];
     },
+    userId() {
+      return this.$store.getters["userId"]
+    }
   },
   methods: {
     getFirstLetter(name) {
@@ -506,6 +571,9 @@ export default {
     },
     test() {
       document.querySelector("#file-input").click();
+    },
+    closeOnClick() {
+      this.$emit("closeOnClick", false);
     },
     async onFilesSelected(files) {
       this.defaultFileList.push({
@@ -519,6 +587,7 @@ export default {
       var formData = new FormData();
       formData.append("uploadfiles", files.target.files[0]);
       formData.append("patientId", this.idPatient);
+      formData.append("userId", this.userId)
       await axios({
         url: "http://127.0.0.1:8000/pc/pc_load",
         method: "POST",
@@ -555,62 +624,59 @@ export default {
           console.log(err);
         });
     },
-    // async addHistory() {
-    //   let me = this;
-    //   var formData = new FormData();
-    //   for (var i = 0; i < this.fileHistory.target.files.length; i++) {
-    //     console.log(this.fileHistory.target.files[i]);
-    //     formData.append("files", this.fileHistory.target.files[i]);
-    //   }
-    //   // return;
-    //   for (const [key, value] of Object.entries(this.historyPatient)) {
-    //     formData.append(key, value);
-    //   }
-    //   formData.append("patient", this.idPatient);
-    //   await axios({
-    //     url: "http://127.0.0.1:8000/medical_record/",
-    //     method: "POST",
-    //     data: formData,
-    //     headers: {
-    //       Authorization: `Bearer ${me.accessToken}`,
-    //     },
-    //   })
-    //     .then((result) => {
-    //       this.$message.success("Thêm tiểu sử khám bệnh thành công !");
-    //       this.modalHistory = false;
-    //       console.log(result);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
+    getInfoPayment() {
+      const me = this;
+      axios
+        .post(`http://127.0.0.1:8000/auth/info_payment/`,
+          {
+            userId: this.userId
+          },
+          {
+            headers: { Authorization: `Bearer ${me.accessToken}` },
+          }
+        )
+        .then((res) => {
+          const data = res.data.data
+          if (data.free_usage_count <= 5) {
+            this.test123 = true;
+          } else if (data.unlimited_usage == true) {
+            this.test123 = true;
+          } else if (data.free_usage_count > 5 && data.unlimited_usage == false) {
+            this.payment = true;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async handlePayment() {
+      const me = this;
+      var formData = new FormData();
+      formData.append("orderId", this.orderId);
+      formData.append("orderType", this.orderType);
+      formData.append("amount", this.amount)
+      await axios({
+        url: "http://127.0.0.1:8000/vn_pay/payment",
+        method: "POST",
+        data: formData,
+        headers: {
+          Authorization: `Bearer ${me.accessToken}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        if (res.status == '200') {
+          window.location.href = res.data.data;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    },
     addFileHistory(event) {
       this.modalHistory = true;
       this.fileHistory = event;
     },
-    // async showModalHistory(id) {
-    //   const me = this;
-    //   this.modalHistory = true;
-    //   this.idPatient = id;
-    //   await axios
-    //     .get(
-    //       `http://127.0.0.1:8000/medical_record/list_medical_record_by_patient_id?pk=${id}`,
-    //       {
-    //         headers: { Authorization: `Bearer ${me.accessToken}` },
-    //       }
-    //     )
-    //     .then((res) => {
-    //       this.listHistoryPatient = res.data.data;
-    //       console.log(this.listHistoryPatient);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
-    // changeValueInputSeach() {
-    //   console.log(123);
-    //   console.log(this.inputSearch);
-    // },
     changePage(value) {
       this.listRendered = this.patients.slice(
         (value - 1) * this.pageSize,
@@ -679,27 +745,6 @@ export default {
         ward: patient.address.ward,
       };
       console.log(this.patientSelected);
-      // this.patientSelected = {
-      //   email: "abc@gmail.com",
-      //   password: "aaaaaa",
-      //   username: "aaaaaa",
-      //   name: "aaaaaa",
-      //   unsignedName: "aaaaaa",
-      //   gender: "woman",
-      //   ethnic: "Kinh",
-      //   phone: "",
-      //   dateOfBirth: "",
-      //   insuranceCode: "",
-      //   identification: "",
-      //   address: {
-      //     country: "Việt Nam",
-      //     province: "Thành phố Hà Nội",
-      //     district: "Quận Ba Đình",
-      //     ward: "",
-      //   },
-      //   contact: "",
-      //   detail_address: "",
-      // };
       this.showOrHideDialog(true);
     },
     assignResult(result) {
@@ -720,7 +765,6 @@ export default {
       const a = document.getElementById("listResults");
       a.removeAttribute("hidden", true);
     },
-    // Lâm
     seeResults(id) {
       this.modalHistory = true;
       const me = this;
@@ -746,24 +790,13 @@ export default {
       this.$message.warning(
         "Lần đầu sẽ mất nhiều thời gian để tạo phổi 3D. Vui lòng đợi ..."
       );
-      // var iframe = document.querySelector(".iframe-lung");
-      // setInterval(() => {
-      //   var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-      //   console.log(innerDoc);
-      // }, 1000);
-      // console.log(123323);
-      // setInterval(() => {
-      //   console.log(document.querySelector("#myDiv"));
-      // }, 1000);
     },
     showResult() {
       const a = document.getElementById("resultTlc");
       a.removeAttribute("hidden", true);
     },
     clickInput(idPatient) {
-      this.test123 = true;
-      //   const input = document.getElementById("dicomFiles");
-      //   input.click();
+      this.getInfoPayment();
       this.idPatient = idPatient;
     },
     /**
@@ -868,27 +901,6 @@ export default {
             me.isLoading = false;
             console.log(err);
           });
-
-        // // Danh sách bác sĩ
-        // await axios
-        //   .get(
-        //     "http://localhost:8000/medical_unit/list_doctor_by_medical_unit/?dataFilter=null",
-        //     {
-        //       headers: { Authorization: `Bearer ${me.accessToken}` },
-        //     }
-        //   )
-        //   .then(function (res) {
-        //     res.data.forEach((item) => {
-        //       me.optionDoctor.push({
-        //         value: `${item.name}  --  email: ${item.email}`,
-        //         id: item.id,
-        //       });
-        //     });
-        //     console.log(me.optionDoctor);
-        //   })
-        //   .catch(function (err) {
-        //     console.log(err);
-        //   });
       }
     },
   },
@@ -903,10 +915,6 @@ export default {
   direction: ltr;
   margin: 30px auto 0px;
 }
-/* div#content {
-  width: 86vw;
-  position: relative;
-} */
 div#flexVue {
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -947,5 +955,13 @@ a.navbar-brand.title {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.flex-save-vnpay {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 20px;
 }
 </style>

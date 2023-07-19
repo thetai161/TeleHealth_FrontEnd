@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-result"  id="lungVolumn">
+  <div class="modal-result" hidden id="lungVolumn">
     <div class="" id="contentTlc">
       <div class="modal-content box-shadow mb-4">
         <div class="modal-header">

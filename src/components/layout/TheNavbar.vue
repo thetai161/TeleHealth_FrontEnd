@@ -258,7 +258,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$store.getters["role"]);
+    // console.log(this.$store.getters["role"]);
   },
 };
 </script>

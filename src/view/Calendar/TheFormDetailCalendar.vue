@@ -58,14 +58,6 @@
               />
             </div>
           </div>
-          <!-- <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-3 col-form-label"
-                >Thời gian bắt đầu</label
-              >
-              <div class="col-sm-9">
-                <a-date-picker size="medium" :show-time="{ format: 'HH:mm' }" />
-              </div>
-            </div> -->
           <div class="form-group row">
             <label for="inputEmail3" class="col-sm-3 col-form-label"
               >Thời gian</label
@@ -123,23 +115,8 @@
               </a-select>
             </div>
           </div>
-          <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-3 col-form-label"
-              >Link đính kèm</label
-            >
-            <div class="col-sm-9">
-              <input
-                type="text"
-                class="form-control"
-                id="inputEmail3"
-                placeholder="Ex:https://www.abc.com.vn/"
-                v-model="formMeeting.url_file"
-                :readonly="isInvited || method != 'E'"
-              />
-            </div>
-          </div>
           <div class="form-group row" v-if="method != 'E'">
-            <label for="inputEmail3" class="col-sm-3 col-form-label"
+            <!-- <label for="inputEmail3" class="col-sm-3 col-form-label"
               >Kết luận</label
             >
             <div class="col-sm-9">
@@ -151,7 +128,8 @@
                 v-model="formMeeting.conclusion"
                 :readonly="isInvited || method == 'D'"
               />
-            </div>
+            </div> -->
+            <TheMeetingMinutes/>
           </div>
           <div
             class="form-group row"
@@ -178,8 +156,12 @@
 <script>
 import axios from "axios";
 import moment from "moment";
+import TheMeetingMinutes from "../Calendar/TheMeetingMinutes.vue"
 export default {
   props: ["isShow", "method", "inforCalendar", "inforCalendar", "isInvited"],
+  components: {
+    TheMeetingMinutes
+  },
   computed: {
     accessToken() {
       return this.$store.getters.accessToken;
