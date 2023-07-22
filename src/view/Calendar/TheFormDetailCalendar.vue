@@ -116,24 +116,34 @@
             </div>
           </div>
           <div class="form-group row" v-if="method != 'E'">
-            <!-- <label for="inputEmail3" class="col-sm-3 col-form-label"
-              >Kết luận</label
+            <label for="inputEmail3" class="col-sm-3 col-form-label"
+              >Biên bản</label
             >
-            <div class="col-sm-9">
+            <div class="col-sm-9" v-if="method == 'D' && isInvited == true">
+              <input
+                type="text"
+                class="form-control"
+                id="inputEmail3"
+                placeholder="Ex: Kết thúc hội chẩn"
+                v-model="conclusionGuest"
+              />
+            </div>
+            <div class="col-sm-9" v-else>
               <input
                 type="text"
                 class="form-control"
                 id="inputEmail3"
                 placeholder="Ex: Kết thúc hội chẩn"
                 v-model="formMeeting.conclusion"
-                :readonly="isInvited || method == 'D'"
               />
-            </div> -->
-            <TheMeetingMinutes/>
+            </div>
+            <!-- <TheMeetingMinutes /> -->
           </div>
+          <p>{{ method }}</p>
+          <p>{{ isInvited }}</p>
           <div
             class="form-group row"
-            v-if="(method == 'U' || method == 'E') && !isInvited"
+            v-if="(method == 'U' || method == 'E' || method == 'D')"
           >
             <div class="flex-save-cancle">
               <button
@@ -182,6 +192,9 @@ export default {
         this.valueOptions.push({
           value: item.meeting_guest_email,
         });
+        if(item.meeting_guest_email == this.email) {
+          this.conclusionGuest = item.conclusion_guest
+        }
       });
       console.log(this.valueOptions);
     },
@@ -206,6 +219,7 @@ export default {
         //   },
         // ],
       },
+      conclusionGuest: ""
     };
   },
   methods: {
@@ -240,7 +254,7 @@ export default {
     },
     btnSaveOnClick() {
       const me = this;
-      if (me.method == "U") {
+      if (me.method == "U" && me.isInvited == false) {
         let conclusion = this.formMeeting.conclusion;
         if (!conclusion || !conclusion.trim()) {
           this.$message.warning("Vui lòng nhập kết luận để tiếp tục");
@@ -262,7 +276,7 @@ export default {
               console.log(err);
             });
         }
-      } else if (me.method == "E") {
+      } else if (me.method == "E" && me.isInvited == false) {
         this.formMeeting.guest = [];
         this.valueOptions.forEach((item) => {
           this.formMeeting.guest.push({
@@ -290,6 +304,48 @@ export default {
           .catch((err) => {
             console.log(err);
           });
+      } else if (me.method == "D" && me.isInvited == false) {
+        let conclusion = this.formMeeting.conclusion;
+        if (!conclusion || !conclusion.trim()) {
+          this.$message.warning("Vui lòng nhập kết luận để tiếp tục");
+        } else {
+          axios
+            .post(
+              `http://127.0.0.1:8000/meeting/add_meeting_conclusion?pk=${this.formMeeting.id}`,
+              { conclusion },
+              {
+                headers: { Authorization: `Bearer ${me.accessToken}` },
+              }
+            )
+            .then((response) => {
+              console.log(response);
+              me.closeForm();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      } else if (me.method == "D" && me.isInvited == true) {
+        let conclusion = this.conclusionGuest;
+        if (!conclusion || !conclusion.trim()) {
+          this.$message.warning("Vui lòng nhập kết luận để tiếp tục");
+        } else {
+          axios
+            .post(
+              `http://127.0.0.1:8000/meeting/add_meeting_conclusion_by_guest?pk=${this.formMeeting.id}`,
+              { conclusion },
+              {
+                headers: { Authorization: `Bearer ${me.accessToken}` },
+              }
+            )
+            .then((response) => {
+              console.log(response);
+              me.closeForm();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       }
     },
     closeForm() {

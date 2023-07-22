@@ -20,26 +20,19 @@ import { ref } from 'vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { component as CKEditor } from '@ckeditor/ckeditor5-vue';
 
-const editorData = ref('')
+const editorData = ref("<p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td>SỞ Y TẾ</td><td>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</td></tr><tr><td>BỆNH VIỆN ĐA KHOA TỈNH</td><td>Độc lập - Tự do - Hạnh phúc</td></tr></tbody></table></figure>")
 const editorConfig = ref({
-  toolbar : ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
-  heading: {
-    options: [
-      { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph'},
-      { model: 'heading1', title: 'h1', class: 'ck-heading_heading1'},
-      { model: 'heading2', title: 'h2', class: 'ck-heading_heading2'},
-    ]
-  }
+  removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload', 'MediaEmbed'],
 })
 </script>
 
 <template>
-  <CKEditor :editor="ClassicEditor" v-model="editorData" />
+  <CKEditor :editor="ClassicEditor" v-model="editorData" :config="editorConfig"/>
 </template>
 
 <style>
-.ck-editor_editable {
-  min-height: 260px;
+.ck.ck-editor {
+  width: 100%;
 }
 </style>
 

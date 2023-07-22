@@ -291,7 +291,7 @@
                               v-if="isInvited"
                               @click="detailOrUpdate(item, 'D')"
                             >
-                              Thông tin chi tiết
+                              Thêm kết luận
                             </a-menu-item>
                             <a-menu-item
                               v-if="!isInvited"
@@ -454,7 +454,7 @@
                         <template #overlay>
                           <a-menu @click="detailOrUpdate(item, 'D')">
                             <a-menu-item key="1">
-                              Thông tin chi tiết
+                              Chỉnh sửa kết luận
                             </a-menu-item>
                             <!-- <a-menu-item key="2" @click="seeResults(item.id)">
                               Xóa
