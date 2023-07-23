@@ -119,16 +119,7 @@
             <label for="inputEmail3" class="col-sm-3 col-form-label"
               >Biên bản</label
             >
-            <div class="col-sm-9" v-if="method == 'D' && isInvited == true">
-              <input
-                type="text"
-                class="form-control"
-                id="inputEmail3"
-                placeholder="Ex: Kết thúc hội chẩn"
-                v-model="conclusionGuest"
-              />
-            </div>
-            <div class="col-sm-9" v-else>
+            <div class="col-sm-9">
               <input
                 type="text"
                 class="form-control"
@@ -137,7 +128,7 @@
                 v-model="formMeeting.conclusion"
               />
             </div>
-            <!-- <TheMeetingMinutes /> -->
+            <TheMeetingMinutes />
           </div>
           <p>{{ method }}</p>
           <p>{{ isInvited }}</p>
@@ -167,6 +158,7 @@
 import axios from "axios";
 import moment from "moment";
 import TheMeetingMinutes from "../Calendar/TheMeetingMinutes.vue"
+import { meetingMinutesDefault } from "../Calendar/meetingMinutes"
 export default {
   props: ["isShow", "method", "inforCalendar", "inforCalendar", "isInvited"],
   components: {
@@ -192,9 +184,6 @@ export default {
         this.valueOptions.push({
           value: item.meeting_guest_email,
         });
-        if(item.meeting_guest_email == this.email) {
-          this.conclusionGuest = item.conclusion_guest
-        }
       });
       console.log(this.valueOptions);
     },
@@ -219,7 +208,6 @@ export default {
         //   },
         // ],
       },
-      conclusionGuest: ""
     };
   },
   methods: {
@@ -326,13 +314,13 @@ export default {
             });
         }
       } else if (me.method == "D" && me.isInvited == true) {
-        let conclusion = this.conclusionGuest;
+        let conclusion = this.formMeeting.conclusion;
         if (!conclusion || !conclusion.trim()) {
           this.$message.warning("Vui lòng nhập kết luận để tiếp tục");
         } else {
           axios
             .post(
-              `http://127.0.0.1:8000/meeting/add_meeting_conclusion_by_guest?pk=${this.formMeeting.id}`,
+              `http://127.0.0.1:8000/meeting/add_meeting_conclusion?pk=${this.formMeeting.id}`,
               { conclusion },
               {
                 headers: { Authorization: `Bearer ${me.accessToken}` },

@@ -19,8 +19,9 @@ onMounted(getDefaultContent)
 import { ref } from 'vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { component as CKEditor } from '@ckeditor/ckeditor5-vue';
+import { meetingMinutesDefault } from "../Calendar/meetingMinutes"
 
-const editorData = ref("<p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td>SỞ Y TẾ</td><td>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</td></tr><tr><td>BỆNH VIỆN ĐA KHOA TỈNH</td><td>Độc lập - Tự do - Hạnh phúc</td></tr></tbody></table></figure>")
+const editorData = meetingMinutesDefault;
 const editorConfig = ref({
   removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload', 'MediaEmbed'],
 })
