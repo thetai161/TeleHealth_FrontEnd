@@ -36,6 +36,7 @@ import LungVolumn3d from "./view/TLC/LungVolumn3d.vue"
 import { DatePicker } from "ant-design-vue";
 import Antd from 'ant-design-vue/es';
 import 'ant-design-vue/dist/antd.css';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 const abc = [
   { path: "/", redirect: "/content/maincontent/dashboard" },
   {
@@ -112,4 +113,5 @@ app.config.globalProperties.$filters = filters;
 app.use(router);
 app.use(store);
 app.mount("#app");
+app.use(CKEditor)
 window._ = require('lodash');

@@ -43,7 +43,7 @@
               />
             </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row" v-if="method == 'E'">
             <label for="inputEmail3" class="col-sm-3 col-form-label"
               >Nội dung</label
             >
@@ -58,7 +58,7 @@
               />
             </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row" v-if="method == 'E'">
             <label for="inputEmail3" class="col-sm-3 col-form-label"
               >Thời gian</label
             >
@@ -80,7 +80,7 @@
               />
             </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row" v-if="method == 'E'">
             <label for="inputEmail3" class="col-sm-3 col-form-label"
               >Đường dẫn</label
             >
@@ -120,18 +120,16 @@
               >Biên bản</label
             >
             <div class="col-sm-9">
-              <input
+              <!-- <input
                 type="text"
                 class="form-control"
                 id="inputEmail3"
                 placeholder="Ex: Kết thúc hội chẩn"
                 v-model="formMeeting.conclusion"
-              />
+              /> -->
             </div>
             <TheMeetingMinutes />
           </div>
-          <p>{{ method }}</p>
-          <p>{{ isInvited }}</p>
           <div
             class="form-group row"
             v-if="(method == 'U' || method == 'E' || method == 'D')"

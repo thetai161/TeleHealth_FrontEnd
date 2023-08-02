@@ -1,39 +1,58 @@
-<!-- <script setup>
-import { ref, onMounted } from 'vue'
-import { QuillEditor } from '@vueup/vue-quill';
-import '@vueup/vue-quill/dist/vue-quill.snow.css'
-
-const content = ref({})
-const getDefaultContent = () => {
-  content.value = JSON.parse('aaaaaaaaaa')
-}
-onMounted(getDefaultContent)
-
-</script>
-
 <template>
-  <QuillEditor v-model:content="content" theme="snow" toolbar="essential"/>
-</template> -->
-
-<script setup>
-import { ref } from 'vue';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { component as CKEditor } from '@ckeditor/ckeditor5-vue';
-import { meetingMinutesDefault } from "../Calendar/meetingMinutes"
-
-const editorData = meetingMinutesDefault;
-const editorConfig = ref({
-  removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload', 'MediaEmbed'],
-})
-</script>
-
-<template>
-  <CKEditor :editor="ClassicEditor" v-model="editorData" :config="editorConfig"/>
+  <div class="ck_editor">
+    <ckeditor v-model="dataText" :editor="editor" @ready="onReady"></ckeditor>
+  </div>
 </template>
 
-<style>
-.ck.ck-editor {
+<script>
+import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import { meetingMinutesDefault } from "../Calendar/meetingMinutes";
+import { ref } from 'vue';
+const configEditor = ref({
+  fontSize: {
+            options: [
+                9,
+                11,
+                13,
+                'default',
+                17,
+                19,
+                21
+            ]
+        },
+        toolbar: [
+          'fontSize', 
+        ]
+})
+export default {
+  name: "TheMeetingMinutes",
+  data() {
+    return {
+      editor: DecoupledEditor,
+      dataText: meetingMinutesDefault,
+    };
+  },
+  methods: {
+    onReady(editor) {
+      editor.ui
+        .getEditableElement()
+        .parentElement.insertBefore(
+          editor.ui.view.toolbar.element,
+          editor.ui.getEditableElement()
+        );
+    },
+  },
+};
+</script>
+
+<style scoped>
+.ck_editor {
+  display: block;
   width: 100%;
+}
+.ck.ck-content {
+  min-height: 500px;
+  max-height: 520px;
 }
 </style>
 
