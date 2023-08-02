@@ -157,16 +157,6 @@
                 </a>
               </li>
             </router-link>
-            <!-- <router-link to="/content/maincontent/tlc">
-
-                                    <li class="">
-                                        <a href="app.user.html" data-pjax-state="load">
-                                            <span class="nav-icon text-success"><img src="../../assets/img/icons8-lungs-100.png" style="width:24px;height:24px" alt=""/></span>
-                                            <span class="nav-text">Tính thể tích phổi</span>
-                                </a>
-                            </li>
-                        </router-link> -->
-
             <li class="nav-header hidden-folded" v-if="role != 'role2' && role">
               <span class="text-muted">Chức năng</span>
             </li>
@@ -199,7 +189,22 @@
                       alt=""
                   /></span>
                   <span class="nav-text">Lịch hội chẩn</span>
-                  <!-- <span class="nav-badge"><b class="badge-circle xs text-danger"></b></span> -->
+                </a>
+              </li>
+            </router-link>
+            <router-link
+              to="/content/maincontent/list_calendar"
+              v-if="role != 'role2' && role"
+            >
+              <li class="">
+                <a href="app.calendar.html" data-pjax-state="load">
+                  <span class="nav-icon text-info"
+                    ><img
+                      src="../../assets/img/icons8-messages-48.png"
+                      style="width: 24px; height: 24px"
+                      alt=""
+                  /></span>
+                  <span class="nav-text">Biên bản hội chuẩn</span>
                 </a>
               </li>
             </router-link>

@@ -609,17 +609,17 @@ export default {
           };
           if (
             (new Date() > new Date(item.meeting_time_start) &&
-              !item.conclusion) ||
+              item.is_valid) ||
             (new Date() > new Date(item.meeting_time_end) &&
-              !item.conclusion) ||
+              item.is_valid) ||
             (new Date() < new Date(item.meeting_time_end) &&
-              item.conclusion &&
+              !item.is_valid &&
               new Date() > new Date(item.meeting_time_end))
           ) {
             data.type = "warning";
           } else if (
             new Date() > new Date(item.meeting_time_end) &&
-            item.conclusion
+            !item.is_valid
           ) {
             data.type = "error";
           }
@@ -648,16 +648,16 @@ export default {
         };
         if (
           (new Date() > new Date(item.meeting_time_start) &&
-            !item.conclusion) ||
-          (new Date() > new Date(item.meeting_time_end) && !item.conclusion) ||
+            item.is_valid) ||
+          (new Date() > new Date(item.meeting_time_end) && item.is_valid) ||
           (new Date() < new Date(item.meeting_time_end) &&
-            item.conclusion &&
+            !item.is_valid &&
             new Date() > new Date(item.meeting_time_end))
         ) {
           data.type = "warning";
         } else if (
           new Date() > new Date(item.meeting_time_end) &&
-          item.conclusion
+          !item.is_valid
         ) {
           data.type = "error";
         }

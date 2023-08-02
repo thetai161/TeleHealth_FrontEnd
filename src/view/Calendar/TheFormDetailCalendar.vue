@@ -128,11 +128,11 @@
                 v-model="formMeeting.conclusion"
               /> -->
             </div>
-            <TheMeetingMinutes />
+            <TheMeetingMinutes :isInvited="isInvited" :method="method" v-model:conclusion="formMeeting.conclusion"/>
           </div>
           <div
             class="form-group row"
-            v-if="(method == 'U' || method == 'E' || method == 'D')"
+            v-if="(method == 'U' || method == 'E' || (method == 'D' && isInvited == false))"
           >
             <div class="flex-save-cancle">
               <button
@@ -156,7 +156,6 @@
 import axios from "axios";
 import moment from "moment";
 import TheMeetingMinutes from "../Calendar/TheMeetingMinutes.vue"
-import { meetingMinutesDefault } from "../Calendar/meetingMinutes"
 export default {
   props: ["isShow", "method", "inforCalendar", "inforCalendar", "isInvited"],
   components: {

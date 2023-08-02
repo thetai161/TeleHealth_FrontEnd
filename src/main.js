@@ -8,6 +8,8 @@ import filters from './utils/filters';
 // Dashboard
 import Dasboard from "./view/Dashboard/TheDashBoard.vue";
 import Calendar from "./view/Calendar/TheCalendar.vue";
+import ListCalendar from "./view/Calendar/TheListCalendar.vue";
+import SuccessPayment from "./view/Dashboard/PaymentSuccess.vue"
 import Dicom from "./view/Dashboard/TheViewDicom.vue";
 import Cancer from "./view/Dashboard/TheViewCancer.vue";
 // Patient
@@ -49,6 +51,8 @@ const abc = [
         component: TheContent,
         children: [
           { path: "calendar", name: "calendar", component: Calendar },
+          { path: "list_calendar", name: "list_calendar", component: ListCalendar },
+          { path: "payment_success", name: "payment_success", component: SuccessPayment },
           { path: "dashboard", name: "Dasboard", component: Dasboard },
           { path: "viewdicom", name: "Dicom", component: Dicom },
           { path: "cancer", name: "Cancer", component: Cancer },
