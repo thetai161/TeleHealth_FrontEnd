@@ -414,7 +414,8 @@ export default {
   async created() {
     const me = this;
     await this.getLocation();
-    setTimeout(() => {
+    if (this.role == "role2") {
+      setTimeout(() => {
       axios
         .get(
           `http://127.0.0.1:8000/patient/detail_profile_patient/`,
@@ -441,6 +442,7 @@ export default {
           console.log(err);
         });
     }, 1000);
+    }
   },
 };
 </script>
@@ -463,7 +465,7 @@ export default {
 }
 #cardDoctor {
   width: 720px;
-  height: 540px;
+  height: 690px;
   direction: ltr;
 }
 #cardDoctor button {
