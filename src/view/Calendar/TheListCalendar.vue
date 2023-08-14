@@ -306,8 +306,9 @@ export default {
       .get(`http://localhost:8000/meeting/end_edit_conclusion/?pk=${id}`, {
         headers: { Authorization: `Bearer ${me.accessToken}` },
       })
-      .then(function (res) {
+      .then((res) => {
         this.showOrHideDialog(false)
+        this.$message.success("Kết thúc chỉnh sửa thành công");
       })
       .catch(function (err) {
         console.log(err);

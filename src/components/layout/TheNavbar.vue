@@ -42,7 +42,7 @@
 
             <router-link
               to="/content/maincontent/patient"
-              v-if="role != 'role2' && role"
+              v-if="role != 'role2' && role != 'role4' && role"
             >
               <li class="">
                 <a href="app.user.html" data-pjax-state="load">
@@ -157,7 +157,7 @@
                 </a>
               </li>
             </router-link>
-            <li class="nav-header hidden-folded" v-if="role != 'role2' && role">
+            <li class="nav-header hidden-folded" v-if="role != 'role2' && role != 'role4' && role">
               <span class="text-muted">Chức năng</span>
             </li>
             <router-link
@@ -178,7 +178,7 @@
             </router-link>
             <router-link
               to="/content/maincontent/calendar"
-              v-if="role != 'role2' && role"
+              v-if="role != 'role2' && role != 'role4' && role"
             >
               <li class="">
                 <a href="app.calendar.html" data-pjax-state="load">
@@ -194,7 +194,7 @@
             </router-link>
             <router-link
               to="/content/maincontent/list_calendar"
-              v-if="role != 'role2' && role"
+              v-if="role != 'role2' && role != 'role4' && role"
             >
               <li class="">
                 <a href="app.calendar.html" data-pjax-state="load">
@@ -208,7 +208,7 @@
                 </a>
               </li>
             </router-link>
-            <router-link
+            <!-- <router-link
               to="/content/maincontent/viewdicom"
               v-if="role != 'role2' && role"
             >
@@ -221,13 +221,12 @@
                       alt=""
                   /></span>
                   <span class="nav-text">Xem ảnh DICOM</span>
-                  <!-- <span class="nav-badge"><b class="badge-circle xs text-danger"></b></span> -->
                 </a>
               </li>
-            </router-link>
+            </router-link> -->
             <router-link
               to="/content/maincontent/cancer"
-              v-if="role != 'role2' && role"
+              v-if="role != 'role2' && role != 'role4' && role"
             >
               <li class="">
                 <a href="app.calendar.html" data-pjax-state="load">

@@ -10,6 +10,7 @@
                 @click="btnAddOnClick"
                 id="addPatient"
                 class="btn btn-white"
+                v-if="role == 'role4'"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -300,6 +301,9 @@ export default {
   computed: {
     accessToken() {
       return this.$store.getters.accessToken;
+    },
+    role() {
+      return this.$store.getters["role"];
     },
   },
 

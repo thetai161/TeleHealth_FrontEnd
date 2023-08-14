@@ -31,7 +31,7 @@
 
       <div id="formDetailDoctor" class="card-body" style="direction: ltr">
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Email</label>
+          <label class="col-sm-4 col-form-label">Email <span style="color: red;">*</span></label>
           <div class="col-sm-8">
             <input
               type="text"
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Mật khẩu</label>
+          <label class="col-sm-4 col-form-label">Mật khẩu <span style="color: red;">*</span></label>
           <div class="col-sm-8">
             <input
               type="text"
@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Username</label>
+          <label class="col-sm-4 col-form-label">Username <span style="color: red;">*</span></label>
           <div class="col-sm-8">
             <input
               type="text"
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Số điện thoại </label>
+          <label class="col-sm-4 col-form-label">Số điện thoại <span style="color: red;">*</span></label>
           <div class="col-sm-8">
             <input
               type="text"
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Tên bệnh viện</label>
+          <label class="col-sm-4 col-form-label">Tên bệnh viện <span style="color: red;">*</span></label>
           <div class="col-sm-8">
             <input
               type="text"
@@ -81,7 +81,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Tên không dấu</label>
+          <label class="col-sm-4 col-form-label">Tên không dấu <span style="color: red;">*</span></label>
           <div class="col-sm-8">
             <input
               type="text"
@@ -91,7 +91,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Địa chỉ</label>
+          <label class="col-sm-4 col-form-label">Địa chỉ <span style="color: red;">*</span></label>
           <div class="col-sm-8">
             <input
               type="text"
@@ -103,11 +103,10 @@
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Mô tả</label>
           <div class="col-sm-8">
-            <input
-              type="text"
+            <textarea
               class="form-control"
               v-model="formDepartment.description"
-            />
+            ></textarea>
           </div>
         </div>
         <div class="form-group row">

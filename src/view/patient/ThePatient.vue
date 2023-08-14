@@ -243,7 +243,7 @@
                         >
                           Bác sĩ quản lý
                         </a-menu-item>
-                        <a-menu-item
+                        <!-- <a-menu-item
                           key="2"
                           @click="seeResults(patient.id)"
                           v-if="role == 'role3' || role == 'role1'"
@@ -256,11 +256,11 @@
                           v-if="role == 'role3' || role == 'role1'"
                         >
                           Tính thể tích phổi
-                        </a-menu-item>
+                        </a-menu-item> -->
                         <a-menu-item
                           key="6"
                           @click="showModalHistory(patient.id)"
-                          v-if="role == 'role3'"
+                          v-if="role == 'role3' || role == 'role1'"
                         >
                           Thêm tiểu sử khám bệnh
                         </a-menu-item>

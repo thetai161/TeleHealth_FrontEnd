@@ -72,16 +72,6 @@
                     v-model="phone"
                   />
                 </div>
-                <div class="form-group">
-                  <label for="role">Chức vụ:</label>
-                  <div>
-                    <select id="role" v-model="role">
-                      <option v-for="option in options" v-bind:value="option.value">
-                        {{ option.text }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
                 <!-- <div class="mb-3 text-sm">
                   <span class="text-muted"
                     >Bằng việc nhấn đăng kí,Tôi đồng ý với
@@ -122,10 +112,6 @@ export default {
       password: "",
       phone: "",
       role: "role1",
-      options: [
-        { text: 'Bác sĩ', value: 'role1' },
-        { text: 'Bệnh viện', value: 'role3' }
-      ],
       usernameError: false,
       emailError: false,
       pwdError: false,

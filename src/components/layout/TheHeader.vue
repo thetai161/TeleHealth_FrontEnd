@@ -124,6 +124,13 @@
               >
                 Thông tin cá nhân <i class="fa-solid fa-circle-info"></i>
               </a-menu-item>
+              <a-menu-item
+                key="1"
+                @click="profilePatient"
+                v-if="role == 'role2'"
+              >
+                Thông tin cá nhân <i class="fa-solid fa-circle-info"></i>
+              </a-menu-item>
               <a-menu-item key="2">
                 Cài đặt <i class="fa-solid fa-gear"></i>
               </a-menu-item>
@@ -154,16 +161,22 @@
       @closeOnClick="showOrHideDialog"
       :inforDoctor="inforDoctor"
     ></FormPersonalDoctor>
+    <ThePatientForm
+      :isShow="isShowPatient"
+      @closeOnClick="showOrHidePatient"
+    ></ThePatientForm>
   </div>
   <!-- End Header -->
 </template>
 
 <script>
 import FormPersonalDoctor from "../../view/doctor/ThePersonalDoctor.vue";
+import ThePatientForm from "../../view/patient/ThePatientForm.vue"
 export default {
   name: "the-header",
   components: {
     FormPersonalDoctor,
+    ThePatientForm
   },
   data() {
     return {
@@ -181,6 +194,7 @@ export default {
         detail_address: "",
       },
       isShowDialog: false,
+      isShowPatient: false,
     };
   },
   computed: {
@@ -203,9 +217,15 @@ export default {
     showOrHideDialog(isShow) {
       this.isShowDialog = isShow;
     },
+    showOrHidePatient(isShow) {
+      this.isShowPatient = isShow;
+    },
     updateProfileDoctor() {
       this.showOrHideDialog(true);
     },
+    profilePatient() {
+      this.showOrHidePatient(true);
+    }
   },
 };
 </script>
