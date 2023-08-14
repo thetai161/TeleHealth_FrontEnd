@@ -103,7 +103,7 @@
               disabled
               type="text"
               class="form-control"
-              v-model="doctorProfile.doctorName"
+              v-model="doctorName"
             />
           </div>
         </div>
@@ -313,6 +313,7 @@ export default {
         districts: [],
         wards: [],
       },
+      doctorName: "Bác sĩ 1",
       doctorProfile: {
         name: "",
         email: "",

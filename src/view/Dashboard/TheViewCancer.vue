@@ -396,7 +396,7 @@
                 padding: 20px 10px 0 0;
               "
             >
-              <h5>Bạn đã sử dụng hết số lần miễn phí, vui lòng thanh toán dịch vụ để trải nghiệm không giới hạn!</h5>
+              <h5>Bạn đã sử dụng hết số lần miễn phí, vui lòng thanh toán dịch vụ để tiếp tục sử dụng dịch vụ</h5>
               <div id="formVnPay" class="card-body" style="direction: ltr">
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Loại hàng hóa</label>
@@ -416,7 +416,9 @@
                       v-model="amount"
                       class="form-control"
                     >
-                      <option value="100000000">Số tiền thanh toán: 1.000.000 VNĐ</option>
+                    <option value="20000000">Số tiền thanh toán: 200.000 VNĐ - 20 lần</option>
+                    <option value="50000000">Số tiền thanh toán: 500.000 VNĐ - 60 lần</option>
+                    <option value="100000000">Số tiền thanh toán: 1.000.000 VNĐ - 150 lần</option>
                     </select>
                   </div>
                 </div>
@@ -428,9 +430,6 @@
                       class="btn btn-primary mt-1"
                     >
                       Thanh toán
-                    </button>
-                    <button @click="closeOnClick" class="btn btn-danger mt-1">
-                      Hủy
                     </button>
                   </div>
                 </div>

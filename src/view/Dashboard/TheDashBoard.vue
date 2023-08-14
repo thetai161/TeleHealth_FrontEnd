@@ -154,27 +154,12 @@ export default {
   async created() {
     const me = this;
     let urlRole = {};
-    // bac si
-    if (this.role == "role3") {
-      urlRole = {
-        urlDoctor: "http://localhost:8000/medical_unit/",
-        urlPatient: "http://127.0.0.1:8000/medical_unit/",
-        urlDepartment: "http://localhost:8000/medical_unit/",
-      };
-    } else if (this.role == "role1") {
-      urlRole = {
-        urlDoctor: "http://localhost:8000/doctor/",
-        urlPatient: `http://127.0.0.1:8000/patient_management/`,
-        urlDepartment: "http://localhost:8000/medical_unit/",
-      };
-    } else if (this.role == "role4") {
-      urlRole = {
-        urlDoctor: "http://localhost:8000/doctor/",
-        urlPatient: `http://localhost:8000/patient/`,
-        urlDepartment: "http://localhost:8000/medical_unit/",
-      };
-    }
-    if (this.role != "role2" && this.role) {
+    urlRole = {
+      urlDoctor: "http://localhost:8000/doctor/",
+      urlPatient: `http://127.0.0.1:8000/patient/`,
+      urlDepartment: "http://localhost:8000/medical_unit/",
+    }  
+    if (this.role) {
       await axios
         .get(urlRole.urlDoctor, {
           headers: { Authorization: `Bearer ${me.accessToken}` },
@@ -191,13 +176,7 @@ export default {
           headers: { Authorization: `Bearer ${me.accessToken}` },
         })
         .then(function (res) {
-          if (me.role == "role3" || me.role=="role4") {
-            me.patients = res.data;
-          } else if (me.role == "role1") {
-            res.data.forEach((item) => {
-              me.patients.push(item.patient);
-            });
-          }
+          me.patients = res.data;
         })
         .catch(function (err) {
           console.log(err);

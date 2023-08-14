@@ -131,9 +131,9 @@
               >
                 Thông tin cá nhân <i class="fa-solid fa-circle-info"></i>
               </a-menu-item>
-              <a-menu-item key="2">
+              <!-- <a-menu-item key="2">
                 Cài đặt <i class="fa-solid fa-gear"></i>
-              </a-menu-item>
+              </a-menu-item> -->
               <a-menu-item key="3" @click="LogOut">
                 Đăng xuất <i class="fa-solid fa-right-from-bracket"></i>
               </a-menu-item>
