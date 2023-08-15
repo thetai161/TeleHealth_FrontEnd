@@ -13,7 +13,7 @@
         padding: 20px 10px 0 0;
       "
     >
-      <h5>Bạn đã thanh toán thành công, từ bây giờ bạn sẽ được sử dụng dịch vụ không giới hạn!</h5>
+      <h5>Bạn đã thanh toán thành công, hãy tiếp tục sử dụng dịch vụ!</h5>
       <div class="form-group row">
         <div class="flex-save-vnpay">
           <button
